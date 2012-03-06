@@ -7,9 +7,25 @@
 //
 
 #import "CalculatorTests.h"
-#import "CalculatorViewController.h"
+#import "CalculatorBrain.h"
+
+@interface CalculatorTests()
+
+@property (nonatomic, strong) CalculatorBrain *brain;
+
+@end
 
 @implementation CalculatorTests
+
+@synthesize brain = _brain;
+
+- (CalculatorBrain *)brain {
+    if (!_brain) {
+        _brain = [[CalculatorBrain alloc] init];
+    }
+    
+    return _brain;
+}
 
 - (void)setUp
 {
@@ -21,13 +37,20 @@
 - (void)tearDown
 {
     // Tear-down code here.
+    self.brain = nil;
     
     [super tearDown];
 }
 
 - (void)testAddTwoDigits
 {
-    STAssertEquals(2, 3, @"Error");
+    [self.brain pushOperand:2];
+    [self.brain pushOperand:3];
+    
+    double expectedResult = 5;
+    double result = [self.brain performOperation:@"+"];
+    
+    STAssertEquals(result, expectedResult, @"Error adding two digits");
 }
 
 @end
