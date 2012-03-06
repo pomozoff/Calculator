@@ -7,6 +7,7 @@
 //
 
 #import "CalculatorTests.h"
+#import "CalculatorViewController.h"
 
 @implementation CalculatorTests
 
@@ -24,9 +25,9 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testAddTwoDigits
 {
-    STFail(@"Unit tests are not implemented yet in CalculatorTests");
+    STAssertEquals(2, 3, @"Error");
 }
 
 @end
